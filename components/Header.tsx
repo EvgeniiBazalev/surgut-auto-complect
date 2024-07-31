@@ -12,7 +12,7 @@ export default async function Header() {
           <AuthButton />
         </div>
       </nav>
-      <div className="flex flex-col gap-16 items-center">
+      <div className="flex flex-col gap-16 items-center mt-4">
         <div className="flex gap-8 justify-center items-center">
           <a href="/" rel="noreferrer">
             <CarOutlined style={{ fontSize: "48px" }} />
