@@ -1,4 +1,4 @@
-import { GeistSans } from "geist/font/sans";
+import { PT_Sans } from "next/font/google";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -7,9 +7,15 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Интернет-магазин автозапчастей в Сургуте",
+  description:
+    "Быстрый и удобный способ покупки автозапчастей в Сургуте. Широкий ассортимент запчастей для всех марок автомобилей.",
 };
+
+const ptSans = PT_Sans({
+  subsets: ["latin", "cyrillic"], // Поддержка латиницы и кириллицы
+  weight: ["400", "700"], // Настройка веса шрифта
+});
 
 export default function RootLayout({
   children,
@@ -17,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="ru" className={ptSans.className}>
       <body className="bg-background text-foreground">
         <main className="min-h-screen flex flex-col items-center">
           {children}
