@@ -4,23 +4,32 @@ import { InfiniteMovingCards } from "./InfiniteMovingCards";
 const items = [
   {
     quote:
-      "“The best time to plant a tree was 20 years ago. The second best time is now.”",
-    name: "Chinese Proverb",
-    title: "Dr. Su",
+      "Скидка 20% на все запчасти для автомобилей Toyota только до конца месяца!",
+    name: "Акция месяца",
+    title: "Спешите воспользоваться!",
   },
-
   {
     quote:
-      "“The best time to plant a tree was 20 years ago. The second best time is now.”",
-    name: "Chinese Proverb",
-    title: "Dr. Su",
+      "Купите комплект шин и получите бесплатную установку и балансировку!",
+    name: "Специальное предложение",
+    title: "Только до конца недели",
   },
-
+  {
+    quote: "Замена масла и фильтров со скидкой 15%! Успейте записаться!",
+    name: "Скидка на услуги",
+    title: "Акция ограничена",
+  },
   {
     quote:
-      "“The best time to plant a tree was 20 years ago. The second best time is now.”",
-    name: "Chinese Proverb",
-    title: "Dr. Su",
+      "При покупке запчастей на сумму от 5000 рублей — бесплатная доставка по Сургуту!",
+    name: "Бесплатная доставка",
+    title: "Спешите воспользоваться",
+  },
+  {
+    quote:
+      "Сезонная распродажа автозапчастей: скидки до 50% на определенные позиции!",
+    name: "Сезонная распродажа",
+    title: "Только сейчас",
   },
 ];
 
