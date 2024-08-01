@@ -34,7 +34,7 @@ const items = [
 ];
 
 const InfiniteMovingCardsMain = () => {
-  return <InfiniteMovingCards items={items} className="mt-20" />;
+  return <InfiniteMovingCards items={items} className="mt-5" />;
 };
 
 export default InfiniteMovingCardsMain;
