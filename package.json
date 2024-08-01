@@ -9,6 +9,7 @@
     "@ant-design/icons": "^5.4.0",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
+    "antd": "^5.19.4",
     "autoprefixer": "10.4.17",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",
