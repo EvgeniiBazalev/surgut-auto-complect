@@ -1,4 +1,5 @@
 import CardStackMain from "@/components/pageComponents/mainPage/CardStackMain";
+import { FeaturesSection } from "@/components/pageComponents/mainPage/FeaturesSection";
 import FlipWordsForMain from "@/components/pageComponents/mainPage/FlipWordsForMain";
 import InfiniteMovingCardsMain from "@/components/pageComponents/mainPage/InfiniteMovingCardsMain";
 
@@ -11,6 +12,7 @@ export default function Index() {
         <FlipWordsForMain />
         <CardStackMain />
       </div>
+      <FeaturesSection />
     </div>
   );
 }
