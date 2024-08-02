@@ -1,3 +1,5 @@
+"use client";
+
 import CardStackMain from "@/components/pageComponents/mainPage/CardStackMain";
 import FAQ from "@/components/pageComponents/mainPage/FAQ";
 import { FeaturesSection } from "@/components/pageComponents/mainPage/FeaturesSection";
