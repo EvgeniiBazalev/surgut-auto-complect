@@ -1,4 +1,4 @@
-import AddCardsUI from "@/components/pageComponents/controlPage/AddCardsUI";
+import { AddCardsUI } from "@/components/pageComponents/controlPage/AddCardsUI";
 import { createClient } from "@/utils/supabase/server";
 
 import { redirect } from "next/navigation";
