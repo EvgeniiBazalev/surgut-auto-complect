@@ -1,21 +1,21 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/client";
 
-export const uploadDataForMainCard = async (insertData: {
+export const uploadDataForMainCard = async (data: {
   name: string;
   designation: string;
   content: string;
   url: string;
-}) => {
-  const supabase = createClient();
-  const { data, error } = await supabase
+}): Promise<void> => {
+  const supabaseClient = createClient();
+  const { data: insertedData, error } = await supabaseClient
     .from("cardsMain")
-    .insert([
-      {
-        name: insertData.name,
-        designation: insertData.designation,
-        content: insertData.content,
-        url: insertData.url,
-      },
-    ])
+    .insert([data])
     .select();
+
+  if (error) {
+    console.error("Error uploading data:", error);
+    throw error;
+  }
+
+  console.log("Data uploaded successfully:", insertedData);
 };
