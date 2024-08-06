@@ -64,7 +64,7 @@ export const AddCardsUI = ({ user }: { user: string }) => {
           onChange={(e) => handleInputChange("content", e.target.value)}
         />
         <Input
-          placeholder="URL"
+          placeholder="Изображение"
           className="mt-4 w-full"
           value={cardInfo.url}
           onChange={(e) => handleInputChange("url", e.target.value)}
@@ -75,11 +75,11 @@ export const AddCardsUI = ({ user }: { user: string }) => {
           onClick={handleAddCard}
           disabled={loading}
         >
-          Add Card
+          Добавить промо акцию
         </Button>
       </Spin>
       <Modal
-        title="Успех"
+        title="Ошибки отсутсвуют"
         open={isModalVisible}
         onOk={handleCloseModal}
         onCancel={handleCloseModal}
