@@ -5,7 +5,7 @@ export const uploadImageToStorage = async (file: File, userId: string) => {
   const filePath = `${userId}/${file.name}`;
 
   const { data, error } = await supabaseClient.storage
-    .from("images")
+    .from("fileStorageMainPage")
     .upload(filePath, file);
 
   if (error) {
