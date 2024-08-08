@@ -18,6 +18,7 @@ export const AddCardsUI = () => {
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [fileList, setFileList] = useState<any[]>([]);
 
   const handleInputChange = (field: string, value: string) => {
     setCardInfo({ ...cardInfo, [field]: value });
@@ -42,6 +43,7 @@ export const AddCardsUI = () => {
         url: "",
       });
       setFile(null); // сброс файла
+      setFileList([]); // сброс списка файлов
       setIsModalVisible(true);
     } catch (error) {
       console.error("Error adding card:", error);
@@ -51,13 +53,13 @@ export const AddCardsUI = () => {
   };
 
   const handleFileChange = (info: any) => {
-    if (info.fileList.length > 0) {
-      const uploadedFile = info.fileList[0].originFileObj;
-
-      // Убедитесь, что файл существует и передайте его в загрузку
+    const { fileList } = info;
+    if (fileList.length > 0) {
+      const uploadedFile = fileList[0].originFileObj;
       if (uploadedFile) {
         console.log("File info:", uploadedFile);
         setFile(uploadedFile);
+        setFileList(fileList); // Обновите список файлов
       }
     }
   };
@@ -67,43 +69,60 @@ export const AddCardsUI = () => {
   };
 
   return (
-    <div>
+    <div className="p-6 bg-white shadow-md rounded-lg border border-gray-200 w-[600px] h-full">
+      <h2 className="text-2xl font-bold mb-4">Добавить промо</h2>
       <Spin spinning={loading}>
-        <Input
-          placeholder="Название акции"
-          className="mt-4 w-full"
-          value={cardInfo.name}
-          onChange={(e) => handleInputChange("name", e.target.value)}
-        />
-        <Input
-          placeholder="Промо акции"
-          className="mt-4 w-full"
-          value={cardInfo.designation}
-          onChange={(e) => handleInputChange("designation", e.target.value)}
-        />
-        <TextArea
-          placeholder="Описание акции"
-          className="mt-4 w-full"
-          value={cardInfo.content}
-          onChange={(e) => handleInputChange("content", e.target.value)}
-        />
-        <Upload
-          beforeUpload={() => false} // Отключить автоматическую загрузку
-          onChange={handleFileChange}
-          className="mt-4 w-full"
-        >
-          <Button icon={<UploadOutlined />} className="mt-4">
-            Загрузить изображение
-          </Button>
-        </Upload>
-        <Button
-          type="default"
-          className="mt-4"
-          onClick={handleAddCard}
-          disabled={loading}
-        >
-          Добавить промо
-        </Button>
+        <div className="space-y-4">
+          <div>
+            <Input
+              placeholder="Название акции"
+              className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+              value={cardInfo.name}
+              onChange={(e) => handleInputChange("name", e.target.value)}
+            />
+          </div>
+          <div>
+            <Input
+              placeholder="Промо акции"
+              className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+              value={cardInfo.designation}
+              onChange={(e) => handleInputChange("designation", e.target.value)}
+            />
+          </div>
+          <div>
+            <TextArea
+              placeholder="Описание акции"
+              className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+              value={cardInfo.content}
+              onChange={(e) => handleInputChange("content", e.target.value)}
+            />
+          </div>
+          <div>
+            <Upload
+              beforeUpload={() => false} // Отключить автоматическую загрузку
+              onChange={handleFileChange}
+              fileList={fileList} // Передайте обновленный список файлов
+              className="w-full"
+            >
+              <Button
+                icon={<UploadOutlined />}
+                className="w-full bg-blue-500 text-white hover:bg-blue-600"
+              >
+                Загрузить изображение
+              </Button>
+            </Upload>
+          </div>
+          <div>
+            <Button
+              type="default"
+              className="w-full bg-green-500 text-white hover:bg-green-600"
+              onClick={handleAddCard}
+              disabled={loading}
+            >
+              Добавить промо
+            </Button>
+          </div>
+        </div>
       </Spin>
       <Modal
         title="Успех"
@@ -112,7 +131,7 @@ export const AddCardsUI = () => {
         onCancel={handleCloseModal}
         okButtonProps={{
           className:
-            "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+            "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded",
         }}
       >
         <p>Промо акция добавлена на сайт!</p>
