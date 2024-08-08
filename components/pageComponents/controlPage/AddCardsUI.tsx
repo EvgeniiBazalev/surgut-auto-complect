@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import { Button, Input, Spin, Modal, Upload } from "antd";
-import TextArea from "antd/es/input/TextArea";
+
 import { uploadDataForMainCard } from "@/support/functions/uploadDataForMainCard";
 import { uploadImageToStorage } from "@/support/functions/uploadImageToStorage";
 import { UploadOutlined } from "@ant-design/icons";
 
+const { TextArea } = Input;
 export const AddCardsUI = () => {
   const [cardInfo, setCardInfo] = useState({
     name: "",
@@ -91,6 +92,7 @@ export const AddCardsUI = () => {
           </div>
           <div>
             <TextArea
+              rows={4}
               placeholder="Описание акции"
               className="w-full p-3 border border-gray-300 rounded-md shadow-sm"
               value={cardInfo.content}
