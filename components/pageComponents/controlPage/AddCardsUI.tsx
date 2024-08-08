@@ -7,7 +7,7 @@ import { uploadDataForMainCard } from "@/support/functions/uploadDataForMainCard
 import { uploadImageToStorage } from "@/support/functions/uploadImageToStorage";
 import { UploadOutlined } from "@ant-design/icons";
 
-export const AddCardsUI = ({ user }: { user: string }) => {
+export const AddCardsUI = () => {
   const [cardInfo, setCardInfo] = useState({
     name: "",
     designation: "",
@@ -28,8 +28,10 @@ export const AddCardsUI = ({ user }: { user: string }) => {
     try {
       let imageUrl = "";
       if (file) {
-        const imageUploadResponse = await uploadImageToStorage(file, user);
+        console.log("File найден");
+        const imageUploadResponse = await uploadImageToStorage(file);
         imageUrl = imageUploadResponse?.path || "";
+        console.log("Image URL:", imageUrl);
       }
 
       await uploadDataForMainCard({ ...cardInfo, url: imageUrl });
@@ -48,8 +50,16 @@ export const AddCardsUI = ({ user }: { user: string }) => {
     }
   };
 
-  const handleFileChange = ({ file }: any) => {
-    setFile(file.originFileObj);
+  const handleFileChange = (info: any) => {
+    if (info.fileList.length > 0) {
+      const uploadedFile = info.fileList[0].originFileObj;
+
+      // Убедитесь, что файл существует и передайте его в загрузку
+      if (uploadedFile) {
+        console.log("File info:", uploadedFile);
+        setFile(uploadedFile);
+      }
+    }
   };
 
   const handleCloseModal = () => {
