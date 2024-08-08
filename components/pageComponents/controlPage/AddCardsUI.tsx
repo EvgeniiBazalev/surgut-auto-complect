@@ -32,7 +32,7 @@ export const AddCardsUI = () => {
       if (file) {
         console.log("File найден");
         const imageUploadResponse = await uploadImageToStorage(file);
-        imageUrl = imageUploadResponse?.path || "";
+        imageUrl = imageUploadResponse?.publicURL || "";
         console.log("Image URL:", imageUrl);
       }
 
@@ -70,7 +70,7 @@ export const AddCardsUI = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg border border-gray-200 w-[600px] h-full">
+    <div className="p-6 my-4 bg-white shadow-md rounded-lg border border-gray-200 w-[600px] h-full">
       <h2 className="text-2xl font-bold mb-4">Добавить промо</h2>
       <Spin spinning={loading}>
         <div className="space-y-4">

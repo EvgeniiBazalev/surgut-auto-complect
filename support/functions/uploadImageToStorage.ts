@@ -4,6 +4,7 @@ export const uploadImageToStorage = async (file: File) => {
   const supabaseClient = createClient();
   const filePath = `public/${file.name}`;
 
+  // Загрузка файла
   const { data, error } = await supabaseClient.storage
     .from("fileStorageMainPage")
     .upload(filePath, file, {
@@ -16,7 +17,12 @@ export const uploadImageToStorage = async (file: File) => {
     throw new Error(error.message);
   }
 
-  return data;
+  // Получение публичного URL
+  const { data: urlData } = supabaseClient.storage
+    .from("fileStorageMainPage")
+    .getPublicUrl(filePath);
+
+  return { publicURL: urlData.publicUrl }; // Убедитесь, что свойство корректное
 };
 
 export const getBucket = async () => {
