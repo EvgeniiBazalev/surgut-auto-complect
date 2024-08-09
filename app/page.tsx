@@ -5,6 +5,7 @@ import FAQ from "@/components/pageComponents/mainPage/FAQ";
 import { FeaturesSection } from "@/components/pageComponents/mainPage/FeaturesSection";
 import FlipWordsForMain from "@/components/pageComponents/mainPage/FlipWordsForMain";
 import InfiniteMovingCardsMain from "@/components/pageComponents/mainPage/InfiniteMovingCardsMain";
+import { ShowCardsFromDBAntD } from "@/components/pageComponents/mainPage/ShowCardsFromDBAntD";
 
 export default function Index() {
   return (
@@ -19,8 +20,10 @@ export default function Index() {
 
       <div className="mt-10 flex flex-col md:flex-row md:space-x-14 space-y-4 md:space-y-0 justify-center items-center">
         <CardStackMain />
+
         <FAQ />
       </div>
+      <ShowCardsFromDBAntD />
     </div>
   );
 }

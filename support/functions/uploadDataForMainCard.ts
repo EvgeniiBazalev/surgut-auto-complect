@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
-
+import { SparePart } from "../interfaces/dataFromDB";
 export const uploadDataForMainCard = async (data: {
   name: string;
   designation: string;
@@ -20,18 +20,7 @@ export const uploadDataForMainCard = async (data: {
   console.log("Data uploaded successfully:", insertedData);
 };
 
-export const uploadDataSpareParts = async (data: {
-  name: string;
-  description1: string;
-  description2: string;
-  price: number;
-  priceSale: number;
-  categoryHL: string;
-  categoryLL: string;
-  quantity: string;
-  src: string;
-  reserve: string;
-}): Promise<void> => {
+export const uploadDataSpareParts = async (data: SparePart): Promise<void> => {
   const supabaseClient = createClient();
 
   const { data: insertedData, error } = await supabaseClient
@@ -45,4 +34,17 @@ export const uploadDataSpareParts = async (data: {
   }
 
   console.log("Data uploaded successfully:", insertedData);
+};
+
+export const fetchDataSpareParts = async (): Promise<SparePart[] | null> => {
+  const supabaseClient = createClient();
+
+  const { data, error } = await supabaseClient.from("spareParts").select();
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+
+  return data as SparePart[];
 };
