@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Card } from "antd";
+import { Card, Row, Col, Spin } from "antd";
 import { fetchDataSpareParts } from "@/support/functions/uploadDataForMainCard";
 import { SparePart } from "@/support/interfaces/dataFromDB";
 
 const { Meta } = Card;
 
 export const ShowCardsFromDBAntD: React.FC = () => {
-  const [data, setData] = useState<SparePart[]>([]);
+  const [data, setData] = useState<SparePart[] | null>(null);
+
   useEffect(() => {
     try {
       const fetchData = async () => {
@@ -18,21 +19,43 @@ export const ShowCardsFromDBAntD: React.FC = () => {
           console.log(dataFromDB);
         }
       };
+
+      fetchData();
     } catch (error) {
       console.log(`Произошла ошибка загрузки данных с БД: ${error}`);
     }
   }, []);
 
   return !data ? (
-    <>loading</>
+    <div className="flex justify-center items-center h-64">
+      <Spin size="large" tip="Loading..." />
+    </div>
   ) : (
-    <p>Загрузились{JSON.stringify(data)}</p>
-    // <Card
-    //   hoverable
-    //   style={{ width: 240 }}
-    //   cover={<img alt="example" src={data[0].src} />}
-    // >
-    //   <Meta title={data[0].name} description={data[0].price} />
-    // </Card>
+    <div className="p-4">
+      <Row gutter={[16, 16]} justify="center">
+        {data.map((item) => (
+          <Col
+            key={item.id}
+            xs={24} // 100% ширины на маленьких экранах
+            sm={12} // 50% ширины на экранах среднего размера
+            md={8} // 33% ширины на экранах большого размера
+            lg={6} // 25% ширины на экранах очень большого размера
+          >
+            <Card
+              hoverable
+              cover={
+                <img
+                  alt={item.name}
+                  src={item.src}
+                  style={{ height: 200, objectFit: "cover" }}
+                />
+              }
+            >
+              <Meta title={item.name} description={`${item.price} ₽`} />
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 };
