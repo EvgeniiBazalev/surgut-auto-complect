@@ -38,6 +38,7 @@ export const uploadDataSpareParts = async (data: SparePart): Promise<void> => {
 
 export const fetchDataSpareParts = async (): Promise<SparePart[] | null> => {
   const supabaseClient = createClient();
+  console.log("начинаем загружать данные из БД");
 
   const { data, error } = await supabaseClient.from("spareParts").select();
 
@@ -45,6 +46,6 @@ export const fetchDataSpareParts = async (): Promise<SparePart[] | null> => {
     console.error("Error fetching data:", error);
     return null;
   }
-
-  return data as SparePart[];
+  console.log(data);
+  return data;
 };
