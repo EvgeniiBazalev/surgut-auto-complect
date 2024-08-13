@@ -21,6 +21,7 @@ export const uploadDataForMainCard = async (data: {
 };
 
 export const uploadDataSpareParts = async (data: SparePart): Promise<void> => {
+  console.log(data);
   const supabaseClient = createClient();
 
   const { data: insertedData, error } = await supabaseClient

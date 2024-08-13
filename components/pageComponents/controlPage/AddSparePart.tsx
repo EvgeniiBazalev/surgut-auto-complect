@@ -41,7 +41,6 @@ export const AddSparePart = () => {
         imageUrl = imageUploadResponse?.publicURL || "";
       }
 
-      // Добавьте URL изображения в src поле
       await uploadDataSpareParts({ ...cardInfo, src: imageUrl });
 
       setCardInfo({
