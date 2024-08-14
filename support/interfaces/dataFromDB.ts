@@ -1,5 +1,5 @@
 export interface SparePart {
-  /* id: number | null; */
+  id: number | null;
   name: string;
   description1: string;
   description2: string;
@@ -11,3 +11,5 @@ export interface SparePart {
   src: string;
   reserve: string;
 }
+
+export type SparePartInsert = Omit<SparePart, "id">;

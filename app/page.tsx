@@ -1,11 +1,11 @@
 "use client";
 
+import { ShowSpareParts } from "@/components/pageComponents/controlPage/ShowSpareParts";
 import CardStackMain from "@/components/pageComponents/mainPage/CardStackMain";
 import FAQ from "@/components/pageComponents/mainPage/FAQ";
 import { FeaturesSection } from "@/components/pageComponents/mainPage/FeaturesSection";
 import FlipWordsForMain from "@/components/pageComponents/mainPage/FlipWordsForMain";
 import InfiniteMovingCardsMain from "@/components/pageComponents/mainPage/InfiniteMovingCardsMain";
-import { ShowCardsFromDBAntD } from "@/components/pageComponents/mainPage/ShowCardsFromDBAntD";
 
 export default function Index() {
   return (
@@ -23,7 +23,7 @@ export default function Index() {
 
         <FAQ />
       </div>
-      <ShowCardsFromDBAntD />
+      <ShowSpareParts />
     </div>
   );
 }

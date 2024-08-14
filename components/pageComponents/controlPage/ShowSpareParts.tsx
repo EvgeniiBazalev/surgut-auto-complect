@@ -33,6 +33,22 @@ export const ShowSpareParts = () => {
         setHlCategories(uniqueHlCategories);
         setLlCategories(uniqueLlCategories);
         setSpareParts(data);
+
+        // Устанавливаем первую категорию верхнего уровня по умолчанию, если она есть
+        if (uniqueHlCategories.length > 0) {
+          setSelectedHlCategory(uniqueHlCategories[0]);
+          // Опционально, можно также установить первую подкатегорию
+          /* const defaultLlCategories = uniqueLlCategories.filter((category) =>
+            data.some(
+              (part) =>
+                part.categoryHL === uniqueHlCategories[0] &&
+                part.categoryLL === category
+            )
+          );
+          if (defaultLlCategories.length > 0) {
+            setSelectedLlCategory(defaultLlCategories[0]);
+          } */
+        }
       }
 
       setLoading(false);
@@ -59,46 +75,59 @@ export const ShowSpareParts = () => {
     }) || [];
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg border border-gray-200 w-full">
-      <h2 className="text-2xl font-bold mb-4">Товары по категориям</h2>
+    <div className="p-6 mt-4 bg-white shadow-md rounded-lg border border-gray-200 w-full sm:w-11/12 md:w-9/12 lg:w-8/12 xl:w-8/12 mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        Товары по категориям
+      </h2>
 
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-        <Select
-          placeholder="Выберите категорию высокого уровня"
-          className="w-full md:w-1/2"
-          onChange={handleHlCategoryChange}
-          value={selectedHlCategory}
-          allowClear
-        >
-          {hlCategories.map((category) => (
-            <Option key={category} value={category}>
-              {category}
-            </Option>
-          ))}
-        </Select>
-
-        <Select
-          placeholder="Выберите категорию низкого уровня"
-          className="w-full md:w-1/2"
-          onChange={handleLlCategoryChange}
-          value={selectedLlCategory}
-          allowClear
-          disabled={!selectedHlCategory} // Отключаем, если HL категория не выбрана
-        >
-          {llCategories
-            .filter((category) =>
-              spareParts?.some(
-                (part) =>
-                  part.categoryHL === selectedHlCategory &&
-                  part.categoryLL === category
-              )
-            )
-            .map((category) => (
+        <div className="w-full md:w-1/2 flex-wrap">
+          <p className="mb-2 text-gray-700 font-medium">Выберите категорию</p>
+          <Select
+            placeholder="Выберите категорию высокого уровня"
+            className="w-full"
+            onChange={handleHlCategoryChange}
+            value={selectedHlCategory}
+            allowClear
+            size="large"
+            style={{ borderRadius: "8px" }}
+          >
+            {hlCategories.map((category) => (
               <Option key={category} value={category}>
                 {category}
               </Option>
-            )) || []}
-        </Select>
+            ))}
+          </Select>
+        </div>
+        <div className="w-full md:w-1/2 flex-wrap">
+          <p className="mb-2 text-gray-700 font-medium">
+            Выберите подкатегорию
+          </p>
+          <Select
+            placeholder="Выберите категорию низкого уровня"
+            className="w-full"
+            onChange={handleLlCategoryChange}
+            value={selectedLlCategory}
+            allowClear
+            size="large"
+            style={{ borderRadius: "8px" }}
+            disabled={!selectedHlCategory} // Отключаем, если HL категория не выбрана
+          >
+            {llCategories
+              .filter((category) =>
+                spareParts?.some(
+                  (part) =>
+                    part.categoryHL === selectedHlCategory &&
+                    part.categoryLL === category
+                )
+              )
+              .map((category) => (
+                <Option key={category} value={category}>
+                  {category}
+                </Option>
+              )) || []}
+          </Select>
+        </div>
       </div>
 
       <Spin spinning={loading}>
@@ -107,20 +136,28 @@ export const ShowSpareParts = () => {
             <Card
               key={part.id}
               hoverable
-              className="bg-gray-100 border border-gray-300 rounded-lg"
+              className="bg-gray-100 border border-gray-300 rounded-lg overflow-hidden shadow-sm"
               cover={
                 <img
                   alt={part.name}
                   src={part.src}
-                  className="h-48 object-cover rounded-t-lg"
+                  className="h-48 object-cover w-full"
                 />
               }
             >
               <Card.Meta
-                title={part.name}
-                description={`Цена: ${part.price} руб. / Скидка: ${part.priceSale} руб.`}
+                title={
+                  <span className="text-lg font-semibold text-gray-800">
+                    {part.name}
+                  </span>
+                }
+                description={
+                  <span className="text-md text-gray-700">
+                    Цена: {part.price} руб. / Скидка: {part.priceSale} руб.
+                  </span>
+                }
               />
-              <p className="mt-2 text-gray-700">{part.description1}</p>
+              <p className="mt-2 text-gray-600">{part.description1}</p>
             </Card>
           ))}
         </div>

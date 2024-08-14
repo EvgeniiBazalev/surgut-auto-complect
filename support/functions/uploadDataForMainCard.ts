@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/client";
-import { SparePart } from "../interfaces/dataFromDB";
+import { SparePart, SparePartInsert } from "../interfaces/dataFromDB";
+
 export const uploadDataForMainCard = async (data: {
   name: string;
   designation: string;
@@ -20,7 +21,9 @@ export const uploadDataForMainCard = async (data: {
   console.log("Data uploaded successfully:", insertedData);
 };
 
-export const uploadDataSpareParts = async (data: SparePart): Promise<void> => {
+export const uploadDataSpareParts = async (
+  data: SparePartInsert
+): Promise<void> => {
   console.log(data);
   const supabaseClient = createClient();
 
