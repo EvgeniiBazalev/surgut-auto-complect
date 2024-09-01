@@ -27,7 +27,7 @@ const page = () => {
     return <div>Загрузка...</div>;
   }
 
-  return <div>{<p>{spareParts}</p>}</div>;
+  return <div>{JSON.stringify(spareParts)}</div>;
 };
 
 export default page;

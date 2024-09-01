@@ -1,12 +1,11 @@
 const apiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-const token = process.env.STRAPI_API_TOKEN;
+const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
 export const fetchSparePartsStrapi = async () => {
   try {
     const response = await fetch(`${apiUrl}/api/spare-parts`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -16,6 +15,7 @@ export const fetchSparePartsStrapi = async () => {
     }
 
     const data = await response.json();
+    console.log(token);
     return data;
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
