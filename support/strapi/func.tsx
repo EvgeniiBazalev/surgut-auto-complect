@@ -15,7 +15,7 @@ export const fetchSparePartsStrapi = async () => {
     }
 
     const data = await response.json();
-    console.log(token);
+
     return data;
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
