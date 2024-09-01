@@ -26,14 +26,14 @@ const fetchFromApi = async (url: string): Promise<any> => {
 
 export const fetchSparePartsStrapi = async (): Promise<any> => {
   // Сначала пробуем внешний URL
-  console.log(`Попытка подключения к внешнему API: ${externalApiUrl}`);
-  let data = await fetchFromApi(externalApiUrl);
+  console.log(`Попытка подключения к локальному API: ${localApiUrl}`);
+  let data = await fetchFromApi(localApiUrl);
 
   // Если внешний URL недоступен, пробуем локальный URL
   if (!data) {
-    console.log("Пробую подключение к локальному API...");
-    console.log(`Попытка подключения к локальному API: ${localApiUrl}`);
-    data = await fetchFromApi(localApiUrl);
+    console.log("Пробую подключение к внешнему API...");
+    console.log(`Попытка подключения к внешнему API: ${externalApiUrl}`);
+    data = await fetchFromApi(externalApiUrl);
   }
 
   return data;
