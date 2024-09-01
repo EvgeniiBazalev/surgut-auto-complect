@@ -6,7 +6,8 @@ import { fetchSparePartsStrapi } from "@/support/strapi/func";
 interface SparePart {
   id: number;
   attributes: {
-    test: string;
+    name: string;
+    description: string;
     createdAt: string;
     updatedAt: string;
   };
@@ -40,7 +41,8 @@ const Page: React.FC = () => {
       {spareParts.map((sparePart) => (
         <div key={sparePart.id}>
           <h3>Spare Part ID: {sparePart.id}</h3>
-          <p>Test: {sparePart.attributes.test}</p>
+          <p>Name: {sparePart.attributes.name}</p>
+          <p>Description: {sparePart.attributes.description}</p>
           <p>
             Created At:{" "}
             {new Date(sparePart.attributes.createdAt).toLocaleString()}
